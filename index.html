@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta bajo la nieve 🌸</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b9d 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fondo animado con partículas */
+    .background-particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Contenedor principal responsivo */
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Carta con efecto glassmorphism mejorado */
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 30px 25px;
+      border-radius: 25px;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      transform: scale(0.8);
+      opacity: 0;
+      animation: cardAppear 2s ease-out forwards;
+    }
+
+    @keyframes cardAppear {
+      0% {
+        transform: scale(0.8) rotateY(90deg);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* Título principal con mejor tipografía */
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 25px;
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 182, 193, 0.3);
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      line-height: 1.2;
+    }
+
+    @keyframes titleGlow {
+      from {
+        text-shadow: 
+          0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 40px rgba(255, 182, 193, 0.3);
+      }
+      to {
+        text-shadow: 
+          0 0 30px rgba(255, 255, 255, 0.8),
+          0 0 50px rgba(255, 182, 193, 0.6),
+          0 0 70px rgba(255, 107, 157, 0.4);
+      }
+    }
+
+    /* Mensaje principal optimizado para móvil */
+    .message {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      opacity: 1;
+      font-family: 'Poppins', sans-serif;
+      text-align: left;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      position: relative;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Scrollbar personalizada */
+    .message::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .message::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .message::-webkit-scrollbar-thumb {
+      background: rgba(255, 107, 157, 0.7);
+      border-radius: 10px;
+    }
+
+    /* Cursor de máquina de escribir */
+    .typing-cursor {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff6b9d, #ffc0cb);
+      width: 2px;
+      height: 1.2rem;
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      border-radius: 1px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Efecto de escaneo mejorado */
+    .message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 45%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.1) 55%, 
+        transparent 100%);
+      animation: scanline 4s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 15px;
+    }
+
+    @keyframes scanline {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    /* Efecto de texto apareciendo */
+    .typewriter-text {
+      opacity: 0;
+      animation: fadeInChar 0.05s ease-in forwards;
+    }
+
+    @keyframes fadeInChar {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Efecto de teclas presionadas mejorado */
+    .key-press-effect {
+      position: fixed;
+      color: #ff6b9d;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: keyPressAnim 0.4s ease-out;
+      pointer-events: none;
+      z-index: 1000;
+      text-shadow: 0 0 10px rgba(255, 107, 157, 0.8);
+    }
+
+    @keyframes keyPressAnim {
+      0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1) rotate(360deg) translateY(-30px);
+      }
+    }
+
+    /* Corazones flotantes mejorados */
+    .heart {
+      position: fixed;
+      font-size: 18px;
+      color: #ff6b9d;
+      animation: heartFloat 8s ease-in-out infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 10px rgba(255, 107, 157, 0.6);
+      z-index: 5;
+    }
+
+    .heart:hover {
+      transform: scale(1.5);
+      filter: brightness(1.2);
+    }
+
+    @keyframes heartFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+      }
+      25% {
+        transform: translateY(-15px) rotate(90deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-25px) rotate(180deg);
+        opacity: 0.8;
+      }
+      75% {
+        transform: translateY(-15px) rotate(270deg);
+        opacity: 1;
+      }
+    }
+
+    /* Pétalos mejorados */
+    .petal {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #ff6b9d, #ffc0cb, #fff);
+      border-radius: 50% 0 50% 0;
+      animation: petalFall linear infinite;
+      opacity: 0.8;
+      box-shadow: 0 0 5px rgba(255, 107, 157, 0.4);
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(50px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Botón interactivo mejorado */
+    .love-button {
+      background: linear-gradient(45deg, #ff6b9d, #ffc0cb, #ff6b9d);
+      background-size: 200% 200%;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 
+        0 10px 25px rgba(255, 107, 157, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      opacity: 0;
+      animation: buttonSlide 2s ease-out 2s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes buttonSlide {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .love-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 15px 35px rgba(255, 107, 157, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      background-position: 100% 100%;
+    }
+
+    .love-button:active {
+      transform: translateY(0);
+    }
+
+    .love-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+      transition: left 0.6s;
+    }
+
+    .love-button:hover::before {
+      left: 100%;
+    }
+
+    /* Estrellas de fondo */
+    .star {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 4s ease-in-out infinite;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    /* Efecto de ondas */
+    .wave {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 107, 157, 0.1), 
+        transparent);
+      animation: waveMove 6s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes waveMove {
+      0%, 100% {
+        transform: translateX(-50px) skewX(5deg);
+      }
+      50% {
+        transform: translateX(50px) skewX(-5deg);
+      }
+    }
+
+    /* Explosión de corazones */
+    .heart-explosion {
+      position: fixed;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .heart-particle {
+      position: absolute;
+      font-size: 14px;
+      color: #ff6b9d;
+      animation: explode 1.5s ease-out forwards;
+      text-shadow: 0 0 10px rgba(255, 107, 157, 0.8);
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.8) rotate(360deg) translateY(-60px);
+        opacity: 0;
+      }
+    }
+
+    /* Efecto de partículas del mouse */
+    .mouse-sparkle {
+      position: fixed;
+      font-size: 10px;
+      color: #fff;
+      pointer-events: none;
+      z-index: 1000;
+      animation: sparkle 1s ease-out forwards;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotate(360deg) translate(20px, -20px);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive para pantallas muy pequeñas */
+    @media (max-width: 380px) {
+      .card {
+        padding: 20px 15px;
+      }
+      
+      .title {
+        font-size: 1.8rem;
+      }
+      
+      .message {
+        font-size: 0.9rem;
+        padding: 15px;
+      }
+      
+      .love-button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Animación de entrada para toda la página */
+    @keyframes pageLoad {
+      from {
+        filter: blur(10px);
+        opacity: 0;
+      }
+      to {
+        filter: blur(0px);
+        opacity: 1;
+      }
+    }
+
+    .main-container {
+      animation: pageLoad 2s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo con partículas -->
+  <div class="background-particles">
+    <div class="wave"></div>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Carta principal -->
+    <div class="card">
+      <div class="title">Para Brendita Hermosa 🌸</div>
+      
+      <div class="message" id="typewriter-container">
+        <span id="typewriter-text"></span>
+        <span class="typing-cursor" id="cursor"></span>
+      </div>
+      
+      <button class="love-button" onclick="createHeartExplosion(event)">
+        ✨ Enviar amor infinito ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor para explosiones -->
+  <div class="heart-explosion" id="heartContainer"></div>
+
+  <script>
+    // Mensaje para la máquina de escribir
+    const fullMessage = `Brendita hermosa... 🌸
+
+🌻 Hola, niñita bonita, sé que hoy tuviste un día pesadito y quizá a veces mis mensajes te molestan un poquito, pero te los escribo con mucho cariño. 🌹
+
+🌹 Cuando llegues a casa, no olvides cenar bien y tratar de relajarte todo lo que puedas, ojitos de miel. 🌻
+
+🌻 Eres una persona increíble, muy trabajadora, y me encanta cómo eres. Admiro esa inteligencia y esa dedicación que pones en todo, realmente eres impresionante. 🌹
+
+🌹 Si las flores pudieran hablar, seguro pedirían parecerse a ti, porque no hay pétalo que tenga tanta dulzura como tu sonrisa. 💕✨
+
+🌸 Eres la luz en mis días grises, la melodía que llena el silencio, y la razón perfecta para sonreír cada día. 🌻
+
+💕 Descansa mucho, ojitos hermosos, que mañana será un día mejor. Te lo mando con todo mi cariño. ✨`;
+
+    let currentIndex = 0;
+    const typewriterSpeed = 60;
+    const pauseTime = 400;
+
+    // Función para crear efecto de tecla presionada
+    function createKeyPressEffect() {
+      const effects = ['⌨️', '✨', '💫', '🌟'];
+      const effect = document.createElement('div');
+      effect.className = 'key-press-effect';
+      effect.innerHTML = effects[Math.floor(Math.random() * effects.length)];
+      effect.style.left = Math.random() * window.innerWidth + 'px';
+      effect.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(effect);
+      
+      setTimeout(() => {
+        if (effect.parentNode) {
+          effect.parentNode.removeChild(effect);
+        }
+      }, 400);
+    }
+
+    // Función para crear sonido de tecla (simulado visualmente)
+    function createTypingSound() {
+      const soundEffects = ['♪', '♫', '♬', '♭', '♯'];
+      const soundEffect = document.createElement('div');
+      soundEffect.style.position = 'absolute';
+      soundEffect.style.top = '10px';
+      soundEffect.style.right = '10px';
+      soundEffect.style.color = '#ff6b9d';
+      soundEffect.style.fontSize = '10px';
+      soundEffect.style.opacity = '0.7';
+      soundEffect.style.animation = 'fadeInChar 0.3s ease-out';
+      soundEffect.innerHTML = soundEffects[Math.floor(Math.random() * soundEffects.length)];
+      document.querySelector('.card').appendChild(soundEffect);
+      
+      setTimeout(() => {
+        if (soundEffect.parentNode) {
+          soundEffect.parentNode.removeChild(soundEffect);
+        }
+      }, 300);
+    }
+
+    // Función principal de máquina de escribir
+    function typeWriter() {
+      const textElement = document.getElementById('typewriter-text');
+      const cursor = document.getElementById('cursor');
+      
+      if (currentIndex < fullMessage.length) {
+        const currentChar = fullMessage.charAt(currentIndex);
+        
+        // Crear efecto visual de tecla presionada
+        if (Math.random() < 0.15) {
+          createKeyPressEffect();
+        }
+        
+        // Crear sonido visual
+        if (Math.random() < 0.2) {
+          createTypingSound();
+        }
+        
+        // Agregar carácter con efecto
+        const charSpan = document.createElement('span');
+        charSpan.className = 'typewriter-text';
+        charSpan.textContent = currentChar === '\n' ? '\n' : currentChar;
+        
+        if (currentChar === '\n') {
+          charSpan.innerHTML = '<br>';
+        }
+        
+        textElement.appendChild(charSpan);
+        
+        // Auto-scroll para mantener el texto visible
+        const messageContainer = document.getElementById('typewriter-container');
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+        
+        currentIndex++;
+        
+        // Pausa más larga en saltos de línea
+        const delay = currentChar === '\n' ? pauseTime : typewriterSpeed + Math.random() * 30;
+        
+        setTimeout(typeWriter, delay);
+      } else {
+        // Ocultar cursor cuando termine
+        setTimeout(() => {
+          cursor.style.display = 'none';
+        }, 1000);
+      }
+    }
+
+    // Crear pétalos mejorados
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * window.innerWidth + 'px';
+      petal.style.animationDuration = (6 + Math.random() * 4) + 's';
+      petal.style.animationDelay = Math.random() * 2 + 's';
+      
+      // Diferentes formas de pétalos
+      const shapes = ['50% 0 50% 0', '0 50% 0 50%', '50%', '25% 75%'];
+      petal.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+      
+      document.body.appendChild(petal);
+      
+      setTimeout(() => {
+        if (petal.parentNode) {
+          petal.parentNode.removeChild(petal);
+        }
+      }, 10000);
+    }
+
+    // Crear estrellas de fondo
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.animationDelay = Math.random() * 4 + 's';
+      document.body.appendChild(star);
+    }
+
+    // Crear corazones flotantes
+    function createFloatingHeart() {
+      const hearts = ['💕', '💖', '💗', '💝', '💘', '💞'];
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+      heart.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+      heart.style.animationDelay = Math.random() * 8 + 's';
+      
+      heart.addEventListener('click', function() {
+        createHeartExplosion({ 
+          clientX: heart.offsetLeft + 25, 
+          clientY: heart.offsetTop + 25 
+        });
+      });
+      
+      document.body.appendChild(heart);
+    }
+
+    // Explosión de corazones al hacer clic
+    function createHeartExplosion(event) {
+      const container = document.getElementById('heartContainer');
+      const x = event.clientX;
+      const y = event.clientY;
+      
+      const hearts = ['💖', '💕', '💗', '💝', '💘', '💞', '💓', '💟'];
+      
+      for (let i = 0; i < 15; i++) {
+        const heartParticle = document.createElement('div');
+        heartParticle.className = 'heart-particle';
+        heartParticle.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heartParticle.style.left = x + 'px';
+        heartParticle.style.top = y + 'px';
+        
+        // Dirección aleatoria
+        const angle = (Math.PI * 2 * i) / 15;
+        const distance = 80 + Math.random() * 40;
+        
+        heartParticle.style.setProperty('--x', Math.cos(angle) * distance + 'px');
+        heartParticle.style.setProperty('--y', Math.sin(angle) * distance + 'px');
+        
+        container.appendChild(heartParticle);
+        
+        setTimeout(() => {
+          if (heartParticle.parentNode) {
+            heartParticle.parentNode.removeChild(heartParticle);
+          }
+        }, 1500);
+      }
+    }
+
+    // Inicializar elementos
+    function init() {
+      // Crear estrellas
+      for (let i = 0; i < 40; i++) {
+        createStar();
+      }
+      
+      // Crear corazones flotantes
+      for (let i = 0; i < 5; i++) {
+        createFloatingHeart();
+      }
+      
+      // Crear pétalos continuamente
+      setInterval(createPetal, 400);
+      
+      // Recrear corazones flotantes periódicamente
+      setInterval(() => {
+        createFloatingHeart();
+      }, 5000);
+      
+      // Iniciar máquina de escribir
+      setTimeout(typeWriter, 1000);
+    }
+
+    // Efecto de cursor personalizado
+    document.addEventListener('touchstart', function(e) {
+      const touch = e.touches[0];
+      if (Math.random() < 0.3) {
+        const sparkles = ['✨', '💫', '🌟', '⭐', '💎'];
+        const sparkle = document.createElement('div');
+        sparkle.className = 'mouse-sparkle';
+        sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+        sparkle.style.left = touch.clientX + 'px';
+        sparkle.style.top = touch.clientY + 'px';
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, 1000);
+      }
+    });
+
+    // Efecto adicional para mouse en desktop
+    document.addEventListener('mousemove', function(e) {
+      if (Math.random() < 0.05) {
+        const sparkles = ['✨', '💫', '🌟'];
+        const sparkle = document.createElement('div');
+        sparkle.className = 'mouse-sparkle';
+        sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+        sparkle.style.left = e.clientX + 'px';
+        sparkle.style.top = e.clientY + 'px';
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, 1000);
+      }
+    });
+
+    // Inicializar cuando cargue la página
+    window.addEventListener('load', init);
+
+    // Optimización para rendimiento en móvil
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        // Reajustar elementos si es necesario
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(heart => {
+          if (heart.offsetLeft > window.innerWidth - 50) {
+            heart.style.left = (window.innerWidth - 50) + 'px';
+          }
+        });
+      }, 250);
+    });
+  </script>
+
+</body>
+</html>
